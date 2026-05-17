@@ -3,7 +3,7 @@
  * Typed API client for communicating with the Express backend
  */
 
-const API_BASE_URL = "https://credipro-backend-production.up.railway.app/";
+const API_BASE_URL = "https://credipro-backend-production.up.railway.app";
 
 // Lazily cached auth token — fetched from backend on first use
 let authToken: string | null = null;
