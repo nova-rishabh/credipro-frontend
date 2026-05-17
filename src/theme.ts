@@ -7,9 +7,6 @@ const theme = extendTheme({
   },
   styles: {
     global: {
-      'html, body, #root': {
-        minHeight: '100%',
-      },
       body: {
         bg: 'linear-gradient(135deg, #0f0c29, #302b63, #24243e)',
         color: 'white',

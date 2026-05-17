@@ -1,21 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import { ToastProvider } from './context/ToastContext';
+import { ChakraProvider } from '@chakra-ui/react';
+import theme from './theme';
 
-const rootEl = document.getElementById('root');
-if (!rootEl) {
-  throw new Error('Root element #root not found');
-}
-
-const root = ReactDOM.createRoot(rootEl);
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 root.render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <ToastProvider>
-        <App />
-      </ToastProvider>
-    </ErrorBoundary>
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
   </React.StrictMode>
 );
