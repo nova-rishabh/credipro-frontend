@@ -249,6 +249,18 @@ const DefaultResolution: React.FC = () => {
     }
   }, [loanId, notify]);
 
+  const handleReset = useCallback(() => {
+    setLoanId('');
+    setVotedMembers(new Set());
+    setVoteResults({});
+    setSlashingResult(null);
+    notify({
+      title: 'Panel Reset',
+      description: 'All session data has been cleared.',
+      status: 'info',
+    });
+  }, [notify]);
+
   // -----------------------------------------------------------------------
   // Derived state
   // -----------------------------------------------------------------------
@@ -282,16 +294,27 @@ const DefaultResolution: React.FC = () => {
             <span className="material-symbols-outlined text-error">gavel</span>
             <h3 className="text-headline-md font-headline-md text-on-surface">Oracle Voting & Slashing Panel</h3>
           </div>
-          {isValidLoanId && (
-            <button
-              onClick={() => fetchConsensusProgress(trimmedLoanId, true)}
-              disabled={isSyncing}
-              className="px-4 py-2 bg-surface-container-highest text-on-surface text-sm font-bold rounded-lg hover:bg-surface-container-highest/80 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center gap-2 border border-white/10"
-            >
-              <span className={`material-symbols-outlined text-sm ${isSyncing ? 'animate-spin' : ''}`}>refresh</span>
-              <span>Refresh Status</span>
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            {loanId && (
+              <button
+                onClick={handleReset}
+                className="px-4 py-2 bg-surface-container-highest text-on-surface text-sm font-bold rounded-lg hover:bg-surface-container-highest/80 active:scale-[0.98] transition-all flex items-center gap-2 border border-white/10"
+              >
+                <span className="material-symbols-outlined text-sm">restart_alt</span>
+                <span>Reset</span>
+              </button>
+            )}
+            {isValidLoanId && (
+              <button
+                onClick={() => fetchConsensusProgress(trimmedLoanId, true)}
+                disabled={isSyncing}
+                className="px-4 py-2 bg-surface-container-highest text-on-surface text-sm font-bold rounded-lg hover:bg-surface-container-highest/80 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center gap-2 border border-white/10"
+              >
+                <span className={`material-symbols-outlined text-sm ${isSyncing ? 'animate-spin' : ''}`}>refresh</span>
+                <span>Refresh Status</span>
+              </button>
+            )}
+          </div>
         </div>
 
         <hr className="border-white/10" />
